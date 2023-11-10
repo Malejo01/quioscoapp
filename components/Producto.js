@@ -9,7 +9,7 @@ const Producto = ({ producto }) => {
         <div className="border p-3">
             <Image
                 src={`/assets/img/${imagen}.jpg`}
-                alt={`Imgen platillo ${nombre}`}
+                alt={`Imagen platillo ${nombre}`}
                 width={300} height={300}
             />
             <div className="p-5">
