@@ -8,7 +8,8 @@ const Categoria = ({categoria}) => {
     return (
     <div className={
         `${categoriaActual?.id === id ? 'bg-amber-400' : ''}
-        flex items-center mx-5 w-full gap-4 border p-5 hover:bg-amber-400`}>
+        flex items-center mx-5 w-full gap-4 border p-5 hover:bg-amber-400 hover:cursor-pointer`}
+        onClick={() => handleClickCategoria(id)}>
         <Image
             width={70}
             height={70}
@@ -18,8 +19,8 @@ const Categoria = ({categoria}) => {
         />
         <button
             type="button"
-            className="text-2xl font-bold hover:cursor-pointer"
-            onClick={() => handleClickCategoria(id)}
+            className="text-2xl font-bold "
+            
         >
             {nombre}
         </button>
