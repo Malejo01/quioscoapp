@@ -11,6 +11,8 @@ const QuioscoProvider= ({children}) => {
     const [modal, setModal] = useState(false)
     const [pedido, setPedido] = useState([])
     
+
+
     const obtenerCategorias = async () => {
         const {data} = await axios('/api/categorias')
         setCategorias(data)
@@ -37,6 +39,8 @@ const QuioscoProvider= ({children}) => {
     const handleChangeModal = () => {
         setModal(!modal)
     }
+
+  
 
     const handleAgregarPedido = ({categoriaId,imagen, ...producto}) => {
         if (pedido.some(productoState => productoState.id === producto.id)) {
