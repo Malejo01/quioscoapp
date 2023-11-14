@@ -11,7 +11,10 @@ const QuioscoProvider= ({children}) => {
     const [producto, setProducto] = useState({})
     const [modal, setModal] = useState(false)
     const [pedido, setPedido] = useState([])
-    
+    const [nombre, setNombre] = useState()
+    const [total, setTotal] = useState(0)
+
+
     const router= useRouter()
 
     const obtenerCategorias = async () => {
@@ -27,6 +30,12 @@ const QuioscoProvider= ({children}) => {
     useEffect(() => {
         setCategoriaActual(categorias[0])
     },[categorias])
+
+    useEffect(() => {
+        const nuevoTotal = pedido.reduce((total, producto) => (producto.precio * producto.cantidad) + total, 0)
+
+        setTotal(nuevoTotal)
+    },[pedido])
 
     const handleClickCategoria = id  => {
         const categoria = categorias.filter( cat => cat.id === id)
@@ -54,6 +63,13 @@ const QuioscoProvider= ({children}) => {
 
     }
 
+    const colocarOrden = async (e) => {
+        e.preventDefault();
+        console.log('Enviando Orden...')
+    }
+
+
+
     const handleAgregarPedido = ({categoriaId, ...producto}) => {
         if (pedido.some(productoState => productoState.id === producto.id)) {
             //Actualizar la cantidad de pedidos
@@ -61,7 +77,7 @@ const QuioscoProvider= ({children}) => {
             setPedido(pedidoActualizado)
 
             toast.success('Cambios guardados', {
-                position: "top-right",
+                position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -74,7 +90,7 @@ const QuioscoProvider= ({children}) => {
         else {
             setPedido([...pedido, producto])
             toast.success('¡Se agrego tu pedido!', {
-                position: "top-right",
+                position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -100,7 +116,11 @@ const QuioscoProvider= ({children}) => {
                 pedido,
                 handleAgregarPedido,
                 handleEditarCantidades,
-                handleEliminarProducto
+                handleEliminarProducto,
+                nombre,
+                setNombre,
+                colocarOrden,
+                total
             }}
         >
             {children}

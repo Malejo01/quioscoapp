@@ -4,22 +4,20 @@ import useQuiosco from "@/hooks/useQuiosco";
 
 export default function Total() {
 
-    const {pedido} = useQuiosco() 
+    const {pedido, nombre, setNombre, colocarOrden, total} = useQuiosco() 
 
 
     const comprobarPedido = useCallback(() => {
-        return pedido.length === 0
-    },[pedido]);  
+        return pedido.length === 0 || nombre === "";
+    },[pedido,nombre]);  
     
     useEffect(() =>{
           
         comprobarPedido()
     },[pedido, comprobarPedido])
 
-    const colocarOrden = (e) => {
-        e.preventDefault();
-        console.log('Enviando Orden...')
-    }
+    
+
     return (
     <Layout pagina='Total y confirmar pedido'>
 
@@ -32,6 +30,8 @@ export default function Total() {
                     Nombre
                 </label>
                 <input
+                value={nombre}
+                onChange={ e => setNombre(e.target.value)}
                 id="nombre"
                 type="text"
                 className="bg-gray-200 w-full lg:w-1/2 mt-3 p-2 rounded-md "
@@ -39,7 +39,7 @@ export default function Total() {
                 </input>
 
                 <div className="mt-10">
-                    <p>Total a pagar <span className="font-bold">$500</span></p> 
+                    <p className="text-2xl">Total a pagar <span className="font-bold">$ {total}</span></p> 
                 </div>
 
                 <div className="mt-5">
