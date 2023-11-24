@@ -6,7 +6,7 @@ import Orden from "@/components/Orden"
 export default function Admin () {
 // aca no se si va /api/orden o si va /api/ordenes
 
-    const fetcher = () => axios('/api/ordenes').then(datos => datos.data)
+    const fetcher = () => axios('/api/ordenes').then(datos => datos.data) 
 
     const {data, error, isLoading} = useSWR('/api/ordenes', fetcher)
 
