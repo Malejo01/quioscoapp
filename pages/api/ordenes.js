@@ -5,11 +5,15 @@ import { PrismaClient } from "@prisma/client";
 export default async function handler(req, res) {
     const prisma = new PrismaClient()
     //Obtener ordenes
-    const ordenes  = await prisma.orden.findMany({
+    const ordenes  = await prisma.orden.findMany({   
+        /*
+        where: {
+            estado:0
+        }
+        */
+     })
         
-    })
-
-    res.status(200).json(ordenes)
+    res.status(200).json(ordenes);
 
     // Crear ordenes
     if (req.method === "POST") {
