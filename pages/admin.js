@@ -4,7 +4,6 @@ import AdminLayout from "@/layout/AdminLayout"
 import Orden from "@/components/Orden"
 
 export default function Admin () {
-// aca no se si va /api/orden o si va /api/ordenes
 
     const fetcher = () => axios('/api/ordenes').then(datos => datos.data) 
 
