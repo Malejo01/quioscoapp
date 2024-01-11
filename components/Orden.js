@@ -1,11 +1,19 @@
 import Image from "next/image";
-
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function Orden({orden}) {
     const {id, nombre, total, pedido, estado} = orden
 
-    const completarOrden = () => {
-        console.log('completando...', id)
+    const completarOrden = async () => {
+        try {
+           await axios.post(`/api/ordenes/${id}`)
+           
+           toast.success('Orden Lista campeón');
+        } catch (error) {
+            toast.error('Hubo un error')
+            console.log(error)
+        }
     }
 
     return (
@@ -32,7 +40,7 @@ export default function Orden({orden}) {
             </div>
             <div className="md:flex md:items-center md:justify-between my-10">
                     <p className="mt-5 font-black text-4xl text-amber-500">Total: $ {total}</p>
-                    <button className="bg-indigo-600 hover:bg-indigo-800 text-white mt-5 md:mt-0 py-3 px-8 rounded uppercase font-bold "
+                    <button className="bg-indigo-600 hover:bg-indigo-800 text-white mt-5 md:mt-0 py-3 px-8 rounded-lg uppercase font-bold "
                     type="buttone"
                     onClick={completarOrden}
                     >
